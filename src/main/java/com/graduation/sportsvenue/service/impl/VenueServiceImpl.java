@@ -17,7 +17,7 @@ public class VenueServiceImpl implements VenueService {
     VenueMapper venueMapper;
 
     /**
-     * 添加场地
+     * 添加场地a
      * @param venue
      * @return
      */
