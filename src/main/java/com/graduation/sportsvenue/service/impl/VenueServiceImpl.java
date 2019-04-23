@@ -17,7 +17,8 @@ public class VenueServiceImpl implements VenueService {
     VenueMapper venueMapper;
 
     /**
-     * 添加场地a
+     * 添加场地
+     *
      * @param venue
      * @return
      */
@@ -25,4 +26,23 @@ public class VenueServiceImpl implements VenueService {
     public ServiceResponse addVenue(Venue venue) {
         return null;
     }
+
+    /**
+     * 删除场地
+     *
+     * @param venueId
+     * @return
+     */
+    @Override
+    public ServiceResponse delete(Integer venueId) {
+        if (venueId == null) {
+            return ServiceResponse.createErrorResponse("参数错误");
+        }
+        int deleteResult = venueMapper.deleteByVenueId(venueId);
+        if (deleteResult > 0) {
+            return ServiceResponse.createSuccessResponse("删除成功");
+        }
+        return ServiceResponse.createErrorResponse("删除失败");
+    }
+
 }

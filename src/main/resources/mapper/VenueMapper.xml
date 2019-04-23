@@ -75,4 +75,10 @@
     updateTime
     from venue
   </select>
+
+  <update id="deleteByVenueId" parameterType="int">
+    update venue
+    set ifdelete = 1
+    where id = #{id}
+  </update>
 </mapper>

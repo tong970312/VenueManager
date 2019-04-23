@@ -13,4 +13,11 @@ public interface VenueService {
      * @return
      */
     ServiceResponse addVenue(Venue venue);
+
+    /**
+     * 删除场地
+     * @param venueId
+     * @return
+     */
+    ServiceResponse delete(Integer venueId);
 }

@@ -25,9 +25,25 @@ public class VenueController {
     @RequestMapping(value = "addVenue")
     public ServiceResponse addVenue(HttpSession session, Venue venue) {
         User user = (User) session.getAttribute(Const.CURRENTADMIN);
-        if (user!=null){
+        if (user==null){
             return ServiceResponse.createErrorResponse("请管理员登录");
         }
         return venueService.addVenue(venue);
     }
+
+    /**
+     * 场地删除
+     * @param session
+     * @param venueId
+     * @return
+     */
+    @RequestMapping(value = "deleteVenue")
+    public ServiceResponse delete(HttpSession session,Integer venueId){
+        User user = (User) session.getAttribute(Const.CURRENTADMIN);
+        if (user==null){
+            return ServiceResponse.createErrorResponse("请管理员登录");
+        }
+        return venueService.delete(venueId);
+    }
+
 }

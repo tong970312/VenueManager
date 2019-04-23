@@ -45,4 +45,6 @@ public interface VenueMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Venue record);
+
+    int deleteByVenueId(Integer id);
 }
