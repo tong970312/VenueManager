@@ -74,11 +74,17 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
         </dependency>
-
+        <!--FTPUtils-->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.1</version>
+        </dependency>
 
     </dependencies>
 
     <build>
+        <finalName>VenueManager</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
