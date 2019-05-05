@@ -107,7 +107,6 @@ public class UserServiceImpl implements UserService {
         if (user==null){
             return  ServiceResponse.createErrorResponse("参数不能为空");
         }
-
         int updateResult = userMapper.update(user);
         if (updateResult>0){
             User updateUser = userMapper.selectByPrimaryKey(user.getId());

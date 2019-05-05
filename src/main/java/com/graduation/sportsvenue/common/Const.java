@@ -22,5 +22,5 @@ public class Const {
     //修改用户字段
     public static final Integer ACCOUNT_DELETE = 1;
 
-
+    public static final String IMAGEHOST = "http://192.168.163.129/img";
 }

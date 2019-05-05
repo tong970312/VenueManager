@@ -75,4 +75,6 @@ public interface UserMapper {
      * @return
      */
     int update(User user);
+
+    String selectNameByPrimaryKey(Integer userId);
 }

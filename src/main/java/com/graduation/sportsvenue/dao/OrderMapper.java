@@ -45,4 +45,11 @@ public interface OrderMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Order record);
+
+
+    List<Order> selectPayOrder();
+
+    List<Order> selectOrderByUserId(Integer userId);
+
+
 }

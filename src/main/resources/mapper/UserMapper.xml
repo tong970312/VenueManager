@@ -100,4 +100,9 @@
         </set>
         where id = #{id}
     </update>
+    <select id="selectNameByPrimaryKey" parameterType="int" resultType="string">
+        select username
+        from account
+        where id = #{userId}
+    </select>
 </mapper>

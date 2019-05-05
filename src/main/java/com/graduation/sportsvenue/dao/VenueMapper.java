@@ -47,4 +47,6 @@ public interface VenueMapper {
     int updateByPrimaryKey(Venue record);
 
     int deleteByVenueId(Integer id);
+
+    Venue selectByVenueId(Integer venueId);
 }

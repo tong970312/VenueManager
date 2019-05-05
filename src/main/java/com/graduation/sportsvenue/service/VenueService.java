@@ -2,6 +2,7 @@ package com.graduation.sportsvenue.service;
 
 import com.graduation.sportsvenue.bean.Venue;
 import com.graduation.sportsvenue.common.ServiceResponse;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 场地管理接口
@@ -12,7 +13,7 @@ public interface VenueService {
      * @param venue
      * @return
      */
-    ServiceResponse addVenue(Venue venue);
+    ServiceResponse addVenue(Venue venue , MultipartFile multipartFile);
 
     /**
      * 删除场地
