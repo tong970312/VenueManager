@@ -49,4 +49,6 @@ public interface VenueMapper {
     int deleteByVenueId(Integer id);
 
     Venue selectByVenueId(Integer venueId);
+
+    List<Venue> selectCanReserve();
 }

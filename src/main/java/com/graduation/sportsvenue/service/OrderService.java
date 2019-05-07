@@ -1,5 +1,6 @@
 package com.graduation.sportsvenue.service;
 
+import com.graduation.sportsvenue.DTO.AddOrderDTO;
 import com.graduation.sportsvenue.common.ServiceResponse;
 
 import java.util.Date;
@@ -27,9 +28,10 @@ public interface OrderService {
     /**
      * 预定场地
      * @param userId
-     * @param venueId
-     * @param useTime
+     * @param addOrderDTO
      * @return
      */
-    ServiceResponse createOrder(Integer userId, Integer venueId, Integer useTime , String startTime);
+    ServiceResponse createOrder(Integer userId, AddOrderDTO addOrderDTO);
+
+
 }

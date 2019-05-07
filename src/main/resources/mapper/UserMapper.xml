@@ -105,4 +105,14 @@
         from account
         where id = #{userId}
     </select>
+    <select id="selectUser" resultMap="BaseResultMap">
+        select *
+        from account
+        where ifdelete = 0 and role = 0
+    </select>
+    <select id="selectPhone" parameterType="string" resultType="int">
+        select count(*)
+        from account
+        where ifdelete = 0 and phone = #{phone}
+    </select>
 </mapper>

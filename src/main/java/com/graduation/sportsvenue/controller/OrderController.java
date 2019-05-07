@@ -1,10 +1,12 @@
 package com.graduation.sportsvenue.controller;
 
+import com.graduation.sportsvenue.DTO.AddOrderDTO;
 import com.graduation.sportsvenue.bean.User;
 import com.graduation.sportsvenue.common.Const;
 import com.graduation.sportsvenue.common.ServiceResponse;
 import com.graduation.sportsvenue.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,17 +64,15 @@ public class OrderController {
 
     /**
      * 用户预定场地
-     * @param session
-     * @param venueId
-     * @param useTime
+     * @param addOrderDTO
      * @return
      */
     @RequestMapping(value = "addOrder")
-    public ServiceResponse userAddOrder(HttpSession session , Integer venueId, Integer useTime , String startTime){
+    public ServiceResponse userAddOrder(HttpSession session , @RequestBody AddOrderDTO addOrderDTO){
         User user = (User) session.getAttribute(Const.CURRENTUSER);
         if (user == null) {
             return ServiceResponse.createErrorResponse("需要登录");
         }
-        return orderService.createOrder(user.getId(),venueId,useTime ,startTime);
+        return orderService.createOrder(user.getId(),addOrderDTO);
     }
 }

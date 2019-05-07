@@ -77,4 +77,8 @@ public interface UserMapper {
     int update(User user);
 
     String selectNameByPrimaryKey(Integer userId);
+
+    List<User> selectUser();
+
+    int selectPhone(String phone);
 }

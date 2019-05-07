@@ -34,7 +34,7 @@ public class MessageServiceImpl implements MessageService {
         if (StringUtils.isBlank(notice)) {
             return ServiceResponse.createErrorResponse("不能发布空消息");
         }
-        Message message = new Message(adminName, notice);
+        Message message = new Message(notice,adminName);
         int sendResult = messageMapper.insert(message);
         if (sendResult > 0) {
             return ServiceResponse.createSuccessResponse("发布成功");

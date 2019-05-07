@@ -2,6 +2,7 @@ package com.graduation.sportsvenue.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.graduation.sportsvenue.DTO.AddOrderDTO;
 import com.graduation.sportsvenue.bean.Order;
 import com.graduation.sportsvenue.bean.Venue;
 import com.graduation.sportsvenue.common.ServiceResponse;
@@ -12,6 +13,8 @@ import com.graduation.sportsvenue.service.OrderService;
 import com.graduation.sportsvenue.util.BigDecimalUtils;
 import com.graduation.sportsvenue.util.DateUtil;
 import com.graduation.sportsvenue.vo.OrderListVo;
+import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,13 +98,24 @@ public class OrderServiceImpl implements OrderService {
      * 预定场地
      *
      * @param userId
-     * @param venueId
-     * @param useTime
+     * @param addOrderDTO
      * @return
      */
     @Override
-    public ServiceResponse createOrder(Integer userId, Integer venueId, Integer useTime,String startTime) {
-        if (userId == null || venueId == null || useTime == null || startTime == null) {
+    public ServiceResponse createOrder(Integer userId, AddOrderDTO addOrderDTO) {
+
+        JSONObject jsonObject = JSONObject.fromObject(addOrderDTO);
+        Integer venueId = Integer.valueOf(String.valueOf(jsonObject.get("venueId")));
+        Integer useTime = Integer.valueOf(String.valueOf(jsonObject.get("useTime")));
+        String startTime  = null;
+        try {
+            startTime = DateUtil.timeTchange(String.valueOf(jsonObject.get("startTime")));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (userId == null || venueId == null || useTime == null || StringUtils.isBlank(startTime)) {
             return ServiceResponse.createErrorResponse("参数错误");
         }
         Venue venue = venueMapper.selectByVenueId(venueId);
@@ -126,6 +140,7 @@ public class OrderServiceImpl implements OrderService {
             return ServiceResponse.createSuccessResponse("预定场地成功", order2);
         }
         return ServiceResponse.createErrorResponse("预定场地失败");
+
     }
 
     /**

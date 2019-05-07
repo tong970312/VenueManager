@@ -85,4 +85,9 @@
     from venue
     where id = #{venueId} and ifdelete = 0 and status = 0
   </select>
+  <select id="selectCanReserve" resultMap="BaseResultMap">
+    select *
+    from venue
+    where ifdelete = 0 and status = 0
+  </select>
 </mapper>

@@ -3,6 +3,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 public class DateUtil {
     /**
@@ -31,6 +32,14 @@ public class DateUtil {
         DateTimeFormatter dateTimeFormat = DateTimeFormat.forPattern(format);
         DateTime dateTime = dateTimeFormat.parseDateTime(str);
         return dateTime.toDate();
+    }
+
+    public static String timeTchange(String tTime)throws Exception{
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        Date date = formatter.parse(tTime);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sDate=sdf.format(date);
+        return sDate;
     }
 
 

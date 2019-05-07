@@ -1,11 +1,14 @@
 package com.graduation.sportsvenue.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.graduation.sportsvenue.bean.Venue;
 import com.graduation.sportsvenue.common.Const;
 import com.graduation.sportsvenue.common.ServiceResponse;
 import com.graduation.sportsvenue.dao.VenueMapper;
 import com.graduation.sportsvenue.service.VenueService;
 import com.graduation.sportsvenue.util.FTPUtils;
+import com.graduation.sportsvenue.vo.VenueListVo;
 import org.assertj.core.util.Lists;
 import org.assertj.core.util.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -68,7 +72,8 @@ public class VenueServiceImpl implements VenueService {
      * @return
      */
     public static Map<String, String> uploadFile(MultipartFile file) {
-        String path = "D:\\ftppicture";
+      //  String path = "D:\\ftppicture";
+        String path = "D:\\webstormspace\\demo\\src\\picture";
         //获取图片名称
         String originalFileName = file.getOriginalFilename();
         //获取扩展名
@@ -87,7 +92,7 @@ public class VenueServiceImpl implements VenueService {
             file.transferTo(file1);
             //长传到图片服务器
             System.out.println("开始上传图片到服务器");
-            FTPUtils.uploadFile(file1);
+          //  FTPUtils.uploadFile(file1);
             //本地删除应用服务器上的图片
             // file1.delete();
             Map<String, String> map = newHashMap();
@@ -116,6 +121,36 @@ public class VenueServiceImpl implements VenueService {
             return ServiceResponse.createSuccessResponse("删除成功");
         }
         return ServiceResponse.createErrorResponse("删除失败");
+    }
+
+    /**
+     * 获取场地
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public ServiceResponse getVenueList(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Venue> venueList = venueMapper.selectCanReserve();
+        List<VenueListVo> venueListVos = Lists.newArrayList();
+        if (venueList != null && venueList.size() > 0) {
+            for (Venue venue: venueList) {
+                VenueListVo vo = new VenueListVo();
+                vo.setId(venue.getId());
+                vo.setAreaname(venue.getAreaname());
+                vo.setDetail(venue.getDetail());
+                vo.setLocation(venue.getLocation());
+                vo.setImage(Const.IMAGEURL+venue.getImage());
+                vo.setPrice(venue.getPrice());
+                venueListVos.add(vo);
+            }
+            PageInfo pageInfo = new PageInfo(venueListVos);
+            return ServiceResponse.createSuccessResponse("场地列表",pageInfo);
+        }
+
+        return ServiceResponse.createErrorResponse("查找失败");
     }
 
 

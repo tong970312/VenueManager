@@ -21,4 +21,12 @@ public interface VenueService {
      * @return
      */
     ServiceResponse delete(Integer venueId);
+
+    /**
+     * 获取场地列表
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    ServiceResponse getVenueList(Integer pageNum,Integer pageSize);
 }
