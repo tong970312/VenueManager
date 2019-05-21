@@ -326,19 +326,4 @@ public class Venue {
         this.updatetime = updatetime;
     }
 
-    @Override
-    public String toString() {
-        return "Venue{" +
-                "id=" + id +
-                ", areaname='" + areaname + '\'' +
-                ", detail='" + detail + '\'' +
-                ", location='" + location + '\'' +
-                ", image='" + image + '\'' +
-                ", price=" + price +
-                ", status=" + status +
-                ", ifdelete=" + ifdelete +
-                ", createtime=" + createtime +
-                ", updatetime=" + updatetime +
-                '}';
-    }
 }

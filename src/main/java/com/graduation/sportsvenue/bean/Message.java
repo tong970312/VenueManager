@@ -133,15 +133,6 @@ public class Message {
         this.createtime = createtime;
     }
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", noticemsg='" + noticemsg + '\'' +
-                ", adminname='" + adminname + '\'' +
-                ", createtime=" + createtime +
-                '}';
-    }
 
     public Message(String noticemsg, String adminname) {
         this.noticemsg = noticemsg;

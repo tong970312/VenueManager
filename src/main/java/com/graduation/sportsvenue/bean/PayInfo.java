@@ -229,16 +229,4 @@ public class PayInfo {
         this.updatetime = updatetime;
     }
 
-    @Override
-    public String toString() {
-        return "PayInfo{" +
-                "id=" + id +
-                ", orderNo=" + orderNo +
-                ", userid=" + userid +
-                ", platformNum='" + platformNum + '\'' +
-                ", status=" + status +
-                ", createtime=" + createtime +
-                ", updatetime=" + updatetime +
-                '}';
-    }
 }
