@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.selectByUsernameAndPassword(username, password);
 
         if (user == null) {
-            return ServiceResponse.createErrorResponse("账户不存在");
+            return ServiceResponse.createErrorResponse("用户名或者密码错误");
         }
         return ServiceResponse.createSuccessResponse("登录成功", user);
 
@@ -66,13 +66,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public ServiceResponse register(String register) {
         RegisterDTO registerDTO = null;
-
         try {
             registerDTO = JsonFormatUtils.transformJsonToObject(RegisterDTO.class,register);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         if (registerDTO == null) {
             return ServiceResponse.createErrorResponse("参数错误、注册失败");
         }

@@ -31,8 +31,8 @@
       platform_num, status, createTime, 
       updateTime)
     values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{userid,jdbcType=INTEGER}, 
-      #{platformNum,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{updatetime,jdbcType=TIMESTAMP})
+      #{platformNum,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},now(),
+      now())
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.graduation.sportsvenue.bean.PayInfo" >
     <!--

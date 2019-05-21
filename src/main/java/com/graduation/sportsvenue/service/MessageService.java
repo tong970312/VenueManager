@@ -14,6 +14,13 @@ public interface MessageService {
     ServiceResponse sendNotice(String adminName,String notice);
 
     /**
+     * 删除通知
+     * @param messageId
+     * @return
+     */
+    ServiceResponse deleteMsg(String messageId);
+
+    /**
      * 显示所有通知
      * @return
      */

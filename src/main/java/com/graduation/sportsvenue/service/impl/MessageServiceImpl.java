@@ -6,6 +6,7 @@ import com.graduation.sportsvenue.dao.MessageMapper;
 import com.graduation.sportsvenue.service.MessageService;
 import com.graduation.sportsvenue.util.DateUtil;
 import com.graduation.sportsvenue.vo.MessageVo;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +35,37 @@ public class MessageServiceImpl implements MessageService {
         if (StringUtils.isBlank(notice)) {
             return ServiceResponse.createErrorResponse("不能发布空消息");
         }
-        Message message = new Message(notice,adminName);
+        Message message = new Message(notice, adminName);
         int sendResult = messageMapper.insert(message);
         if (sendResult > 0) {
             return ServiceResponse.createSuccessResponse("发布成功");
         }
 
         return ServiceResponse.createErrorResponse("发布失败");
+    }
+
+    /**
+     * 删除通知
+     *
+     * @param messageId
+     * @return
+     */
+    @Override
+    public ServiceResponse deleteMsg(String messageId) {
+        JSONObject jsonObject = JSONObject.fromObject(messageId);
+        Integer msgId = (Integer) jsonObject.get("messageId");
+        if (msgId != null) {
+            Message message = messageMapper.selectByPrimaryKey(msgId);
+            if (message == null){
+                return ServiceResponse.createErrorResponse("要删除的通知不存在");
+            }else{
+                int deleteResult = messageMapper.deleteByPrimaryKey(msgId);
+                if (deleteResult > 0){
+                    return ServiceResponse.createSuccessResponse("删除成功");
+                }
+            }
+        }
+        return ServiceResponse.createErrorResponse("删除失败");
     }
 
     /**

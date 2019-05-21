@@ -51,5 +51,8 @@ public interface OrderMapper {
 
     List<Order> selectOrderByUserId(Integer userId);
 
+    List<Order> selectByAreaId(Integer areaId);
+
+    int payOrder(Integer orderId);
 
 }

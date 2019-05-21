@@ -2,13 +2,17 @@ package com.graduation.sportsvenue.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.graduation.sportsvenue.bean.Order;
 import com.graduation.sportsvenue.bean.Venue;
 import com.graduation.sportsvenue.common.Const;
 import com.graduation.sportsvenue.common.ServiceResponse;
+import com.graduation.sportsvenue.dao.OrderMapper;
 import com.graduation.sportsvenue.dao.VenueMapper;
 import com.graduation.sportsvenue.service.VenueService;
+import com.graduation.sportsvenue.util.DateUtil;
 import com.graduation.sportsvenue.util.FTPUtils;
 import com.graduation.sportsvenue.vo.VenueListVo;
+import org.apache.commons.lang.StringUtils;
 import org.assertj.core.util.Lists;
 import org.assertj.core.util.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +35,8 @@ public class VenueServiceImpl implements VenueService {
 
     @Autowired
     VenueMapper venueMapper;
+    @Autowired
+    OrderMapper orderMapper;
 
     /**
      * 添加场地
@@ -48,14 +54,13 @@ public class VenueServiceImpl implements VenueService {
         }
 
         Map<String, String> fileMap = uploadFile(file);
-        System.out.println("fileMap = " + fileMap);
+
         if (fileMap == null) {
             return ServiceResponse.createErrorResponse("图片上传失败");
         }
         venue.setImage(fileMap.get("URI"));
         venue.setStatus(0);
         venue.setIfdelete(0);
-        System.out.println("venue = " + venue);
 
         int insertResult = venueMapper.insert(venue);
         if (insertResult > 0) {
@@ -72,7 +77,7 @@ public class VenueServiceImpl implements VenueService {
      * @return
      */
     public static Map<String, String> uploadFile(MultipartFile file) {
-      //  String path = "D:\\ftppicture";
+        //  String path = "D:\\ftppicture";
         String path = "D:\\webstormspace\\demo\\src\\picture";
         //获取图片名称
         String originalFileName = file.getOriginalFilename();
@@ -92,7 +97,7 @@ public class VenueServiceImpl implements VenueService {
             file.transferTo(file1);
             //长传到图片服务器
             System.out.println("开始上传图片到服务器");
-          //  FTPUtils.uploadFile(file1);
+            //  FTPUtils.uploadFile(file1);
             //本地删除应用服务器上的图片
             // file1.delete();
             Map<String, String> map = newHashMap();
@@ -136,21 +141,53 @@ public class VenueServiceImpl implements VenueService {
         List<Venue> venueList = venueMapper.selectCanReserve();
         List<VenueListVo> venueListVos = Lists.newArrayList();
         if (venueList != null && venueList.size() > 0) {
-            for (Venue venue: venueList) {
+            for (Venue venue : venueList) {
                 VenueListVo vo = new VenueListVo();
+                Order order = getEndTimeByAreaId(venue.getId());
+                if (order == null){
+                    vo.setEndtime(null);
+                    vo.setStatus("可预订");
+                }else{
+                    try {
+                        vo.setEndtime(DateUtil.dateTochange(DateUtil.dateToString(order.getEndtime())));
+                        if(order.getPaystatus() == 1){
+                            vo.setStatus("已被占用");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 vo.setId(venue.getId());
                 vo.setAreaname(venue.getAreaname());
                 vo.setDetail(venue.getDetail());
                 vo.setLocation(venue.getLocation());
-                vo.setImage(Const.IMAGEURL+venue.getImage());
+                vo.setImage(Const.IMAGEURL + venue.getImage());
                 vo.setPrice(venue.getPrice());
+
                 venueListVos.add(vo);
             }
             PageInfo pageInfo = new PageInfo(venueListVos);
-            return ServiceResponse.createSuccessResponse("场地列表",pageInfo);
+            return ServiceResponse.createSuccessResponse("场地列表", pageInfo);
         }
 
         return ServiceResponse.createErrorResponse("查找失败");
+    }
+
+    /**
+     * 获取已经支付的场地使用结束时间
+     * @param areaId
+     * @return
+     */
+    private Order getEndTimeByAreaId(Integer areaId) {
+        List<Order> orderList = orderMapper.selectByAreaId(areaId);
+        Order order = null;
+        if (orderList != null && orderList.size() > 0){
+            order = orderList.get(0);
+        }
+        else {
+            return null;
+        }
+        return order;
     }
 
 

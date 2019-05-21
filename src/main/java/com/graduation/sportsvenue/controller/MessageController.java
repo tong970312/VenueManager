@@ -44,6 +44,23 @@ public class MessageController {
     }
 
     /**
+     * 删除通知
+     * @param session
+     * @param messageId
+     * @return
+     */
+    @RequestMapping(value = "deleteMsg")
+    public ServiceResponse deleteMsg(HttpSession session,@RequestBody String messageId) {
+        User user = (User) session.getAttribute(Const.CURRENTADMIN);
+        if (user == null) {
+            return ServiceResponse.createErrorResponse("管理员未登录");
+        }
+        return messageService.deleteMsg(messageId);
+
+    }
+
+
+    /**
      * 显示所有通知
      *
      * @return
@@ -53,4 +70,6 @@ public class MessageController {
 
         return messageService.getAllMsg();
     }
+
+
 }

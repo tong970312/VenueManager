@@ -29,17 +29,17 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <!--配置数据表-->
-        <table  tableName="account" domainObjectName="User"  enableCountByExample="false" enableDeleteByExample="false"
-                enableSelectByExample="false" enableUpdateByExample="false"/>
-        <table  tableName="venue" domainObjectName="Venue"  enableCountByExample="false" enableDeleteByExample="false"
-                enableSelectByExample="false" enableUpdateByExample="false"/>
+        <!--&lt;!&ndash;配置数据表&ndash;&gt;-->
+        <!--<table  tableName="account" domainObjectName="User"  enableCountByExample="false" enableDeleteByExample="false"-->
+                <!--enableSelectByExample="false" enableUpdateByExample="false"/>-->
+        <!--<table  tableName="venue" domainObjectName="Venue"  enableCountByExample="false" enableDeleteByExample="false"-->
+                <!--enableSelectByExample="false" enableUpdateByExample="false"/>-->
         <table  tableName="order_v" domainObjectName="Order"  enableCountByExample="false" enableDeleteByExample="false"
                 enableSelectByExample="false" enableUpdateByExample="false"/>
-        <table  tableName="payinfo" domainObjectName="PayInfo"  enableCountByExample="false" enableDeleteByExample="false"
-                enableSelectByExample="false" enableUpdateByExample="false"/>
-        <table  tableName="message" domainObjectName="Message"  enableCountByExample="false" enableDeleteByExample="false"
-                enableSelectByExample="false" enableUpdateByExample="false"/>
+        <!--<table  tableName="payinfo" domainObjectName="PayInfo"  enableCountByExample="false" enableDeleteByExample="false"-->
+                <!--enableSelectByExample="false" enableUpdateByExample="false"/>-->
+        <!--<table  tableName="message" domainObjectName="Message"  enableCountByExample="false" enableDeleteByExample="false"-->
+                <!--enableSelectByExample="false" enableUpdateByExample="false"/>-->
 
     </context>
 </generatorConfiguration>

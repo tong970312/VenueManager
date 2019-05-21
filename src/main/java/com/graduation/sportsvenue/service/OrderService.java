@@ -33,5 +33,19 @@ public interface OrderService {
      */
     ServiceResponse createOrder(Integer userId, AddOrderDTO addOrderDTO);
 
+    /**
+     * 删除场地
+     * @param orderId
+     * @return
+     */
+    ServiceResponse deleteOrder(String orderId);
+
+    /**
+     * 支付订单
+     * @param orderId
+     * @return
+     */
+    ServiceResponse payOrder(Integer userId,String orderId);
+
 
 }

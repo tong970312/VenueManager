@@ -14,10 +14,14 @@ public class VenueListVo {
 
     private String location;
 
-
     private String image;
 
     private BigDecimal price;
+
+    private String status;
+
+    private String endtime;
+
 
 
 }

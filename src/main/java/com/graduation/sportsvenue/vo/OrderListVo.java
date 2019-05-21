@@ -12,6 +12,7 @@ public class OrderListVo {
     private String username;
     private Integer areaid;
     private String starttime;
+    private String endtime;
     private String location;
     private BigDecimal price;
     private Integer usetime;

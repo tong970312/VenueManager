@@ -46,6 +46,7 @@ public class OrderController {
         return orderService.selectOrderPay(pageNum,pageSize);
     }
 
+
     /**
      * 用户查看订单
      * @param session
@@ -74,5 +75,36 @@ public class OrderController {
             return ServiceResponse.createErrorResponse("需要登录");
         }
         return orderService.createOrder(user.getId(),addOrderDTO);
+    }
+
+    /**
+     * 用户删除订单
+     * @param session
+     * @param orderId
+     * @return
+     */
+    @RequestMapping(value = "deleteOrder")
+    public ServiceResponse deleteOrder(HttpSession session , @RequestBody String orderId){
+        User user = (User) session.getAttribute(Const.CURRENTUSER);
+        if (user == null) {
+            return ServiceResponse.createErrorResponse("需要登录");
+        }
+        return orderService.deleteOrder(orderId);
+    }
+
+    /**
+     * 支付订单
+     * @param session
+     * @param orderId
+     * @return
+     */
+    @RequestMapping(value = "payOrder")
+    public  ServiceResponse payOrder(HttpSession session , @RequestBody String orderId){
+        User user = (User) session.getAttribute(Const.CURRENTUSER);
+        if (user == null) {
+            return ServiceResponse.createErrorResponse("需要登录");
+        }
+        return orderService.payOrder(user.getId(),orderId);
+
     }
 }
