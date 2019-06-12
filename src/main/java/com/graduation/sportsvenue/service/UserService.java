@@ -1,8 +1,6 @@
 package com.graduation.sportsvenue.service;
 
-import com.graduation.sportsvenue.DTO.RegisterDTO;
 import com.graduation.sportsvenue.DTO.UserDTO;
-import com.graduation.sportsvenue.bean.User;
 import com.graduation.sportsvenue.common.ServiceResponse;
 
 /**
@@ -39,5 +37,11 @@ public interface UserService {
      */
     ServiceResponse update(String jsonStr);
 
+    /**
+     * 获取用户列表
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     ServiceResponse getUserList(Integer pageNum,Integer pageSize);
 }

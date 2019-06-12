@@ -1,6 +1,5 @@
 package com.graduation.sportsvenue.controller;
 
-import com.graduation.sportsvenue.DTO.RegisterDTO;
 import com.graduation.sportsvenue.DTO.UserDTO;
 import com.graduation.sportsvenue.bean.User;
 import com.graduation.sportsvenue.common.Const;

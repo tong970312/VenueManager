@@ -50,8 +50,6 @@ public class DateUtil {
         return sDate;
     }
 
-
-
     public static Integer getHour(String date1, String date2){
         Long ms = stringToDate(date1).getTime()-stringToDate(date2).getTime();
         return Math.toIntExact(ms / (60 * 60 * 1000));

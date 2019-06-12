@@ -96,7 +96,7 @@ public class VenueServiceImpl implements VenueService {
         try {
             file.transferTo(file1);
             //长传到图片服务器
-            System.out.println("开始上传图片到服务器");
+           // System.out.println("开始上传图片到服务器");
             //  FTPUtils.uploadFile(file1);
             //本地删除应用服务器上的图片
             // file1.delete();
@@ -150,6 +150,7 @@ public class VenueServiceImpl implements VenueService {
                 }else{
                     try {
                         vo.setEndtime(DateUtil.dateTochange(DateUtil.dateToString(order.getEndtime())));
+                        vo.setStarttime(DateUtil.dateTochange(DateUtil.dateToString(order.getStarttime())));
                         if(order.getPaystatus() == 1){
                             vo.setStatus("已被占用");
                         }
@@ -163,7 +164,6 @@ public class VenueServiceImpl implements VenueService {
                 vo.setLocation(venue.getLocation());
                 vo.setImage(Const.IMAGEURL + venue.getImage());
                 vo.setPrice(venue.getPrice());
-
                 venueListVos.add(vo);
             }
             PageInfo pageInfo = new PageInfo(venueListVos);
@@ -187,6 +187,7 @@ public class VenueServiceImpl implements VenueService {
         else {
             return null;
         }
+        System.out.println("order = " + order);
         return order;
     }
 

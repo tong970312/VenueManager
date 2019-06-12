@@ -21,7 +21,7 @@ public class Const {
     public static final Integer ACCOUNT_NOT_EXIT = 0;
     //修改用户字段
     public static final Integer ACCOUNT_DELETE = 1;
-
+    //图片路径
     public static final String IMAGEHOST = "http://192.168.163.129/img";
     public static final String IMAGEURL = "D:\\webstormspace\\demo\\src\\picture\\";
 }

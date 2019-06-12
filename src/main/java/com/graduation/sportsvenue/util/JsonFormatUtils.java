@@ -6,7 +6,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * @author: litong
  * @date: 2019/4/23
- * 假期配置解析类
+ * 配置解析类
  **/
 public class JsonFormatUtils {
 

@@ -22,6 +22,8 @@ public class VenueListVo {
 
     private String endtime;
 
+    private String starttime;
+
 
 
 }
